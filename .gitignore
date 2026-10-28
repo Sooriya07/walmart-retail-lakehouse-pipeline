@@ -1,0 +1,31 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+.venv-linux
+**/.venv/
+
+# Environment variables and secrets
+.env
+.env.*
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Generated files
+**/logs/
+**/target/
+**/dbt_packages/
+
+.env
+.env.*
+!.env.example
+**/airflow.cfg
+**/.user.yml

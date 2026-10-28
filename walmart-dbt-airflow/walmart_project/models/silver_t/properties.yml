@@ -1,0 +1,42 @@
+models:
+
+    - name: orders_t
+      columns:
+        - name: order_id
+          data_tests:
+            - not_null
+            - unique
+    
+    - name: products_t
+      columns:
+        - name: product_id
+          data_tests:
+            - not_null
+            - unique:
+                config:
+                    where: 'price > 0'
+    
+    - name: order_items_t
+      columns:
+        - name: order_id
+          data_tests:
+            - relationships:
+                to: ref('orders_t')
+                field: order_id
+        
+        - name: product_id
+          data_tests:
+            - relationships:
+                to: ref('products_t')
+                field: product_id
+
+        - name: customers_id
+          data_tests:
+            - relationships:
+                to: ref('products_t')
+                field: product_id
+
+        
+        
+    
+    
