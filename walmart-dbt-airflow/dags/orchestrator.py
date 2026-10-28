@@ -17,7 +17,7 @@ def orchestrate():
     @task
     def ingest_cdc():
         ws = WorkspaceClient(
-            host="https://dbc-09b940ca-9485.cloud.databricks.com",
+            host=os.getenv("DATABRICKS_HOST"),
             token = os.getenv("DATABRICKS_TOKEN")
         )
 
