@@ -41,52 +41,52 @@ def orchestrate():
 
     @task.bash
     def clean_target():
-        return "rm -rf /opt/airflow/walmart_project/target && rm -rf /opt/airflow/walmart_project/logs"
+        return "rm -rf /opt/airflow/dbt/target && rm -rf /opt/airflow/dbt/logs"
     
     @task.bash
     def source_freshness():
-        return "cd /opt/airflow/walmart_project && dbt source freshness"
+        return "cd /opt/airflow/dbt && dbt source freshness"
 
 
     silver_technical = BashOperator(
         task_id = 'silver_technical',
-        cwd = '/opt/airflow/walmart_project',
+        cwd = '/opt/airflow/dbt',
         bash_command = 'dbt run --select silver_t'
     )
 
     silver_technical_tests = BashOperator(
         task_id = 'silver_technical_tests',
-        cwd = '/opt/airflow/walmart_project',
+        cwd = '/opt/airflow/dbt',
         bash_command = 'dbt test --select silver_t'
     )
 
     silver_business = BashOperator(
         task_id='silver_business',
-        cwd = '/opt/airflow/walmart_project',
+        cwd = '/opt/airflow/dbt',
         bash_command = 'dbt run --select silver_b'
     )
 
     silver_business_tests = BashOperator(
         task_id = 'silver_business_tests',
-        cwd = '/opt/airflow/walmart_project',
+        cwd = '/opt/airflow/dbt',
         bash_command = 'dbt test --select silver_b'
     )
 
     gold_ephemeral = BashOperator(
         task_id = 'gold_ephemeral',
-        cwd = '/opt/airflow/walmart_project',
+        cwd = '/opt/airflow/dbt',
         bash_command = 'dbt run --select gold/ephemeral'
     )
 
     gold_dimensions = BashOperator(
         task_id = 'gold_dimensions',
-        cwd = '/opt/airflow/walmart_project',
+        cwd = '/opt/airflow/dbt',
         bash_command = 'dbt snapshot'
     )
 
     gold_facts = BashOperator(
         task_id = 'gold_facts',
-        cwd = '/opt/airflow/walmart_project',
+        cwd = '/opt/airflow/dbt',
         bash_command = 'dbt run --select gold/fact'
     )
 
